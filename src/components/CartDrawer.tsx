@@ -23,10 +23,10 @@ export function CartDrawer({ open, onClose }: { open: boolean; onClose: () => vo
 
   const grandTotal = cart.reduce((s, b) => s + b.total, 0);
 
-  const remove = (id: string) => {
-    setBundleStatus(id, "history");
+  const remove = async (id: string) => {
+    await setBundleStatus(id, "history");
     refresh();
-    toast("Removed from bag");
+    window.dispatchEvent(new CustomEvent("intentio:cart-update"));
   };
 
   if (!open) return null;

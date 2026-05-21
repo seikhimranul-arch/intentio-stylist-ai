@@ -12,7 +12,7 @@ function LoginPage() {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
 
-  const submit = (e: React.FormEvent) => {
+  const submit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError("");
     if (!email.includes("@") || password.length < 4) {
@@ -20,13 +20,13 @@ function LoginPage() {
       return;
     }
     try {
-      if (mode === "signup") signUp(email, password);
-      else signIn(email, password);
+      if (mode === "signup") await signUp(email, password);
+      else await signIn(email, password);
       toast.success(mode === "signup" ? "Welcome to Intentio ✦" : "Signed in");
       const p = getProfile();
       navigate({ to: p?.onboarded ? "/chat" : "/onboarding" });
-    } catch {
-      setError("Something went wrong. Try again.");
+    } catch (err: any) {
+      setError(err.message || "Something went wrong. Try again.");
     }
   };
 

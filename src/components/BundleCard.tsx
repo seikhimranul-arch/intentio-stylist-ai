@@ -6,12 +6,13 @@ export function BundleCard({ bundle, onAdded }: { bundle: Bundle; onAdded?: () =
   const [inCart, setInCart] = useState(bundle.status === "cart");
   const [pulse, setPulse] = useState(false);
 
-  const addToBag = () => {
-    setBundleStatus(bundle.id, "cart");
+  const addToBag = async () => {
     setInCart(true);
     setPulse(true);
+    await setBundleStatus(bundle.id, "cart");
     setTimeout(() => setPulse(false), 700);
     toast.success("Added to your Intentio Bag ✓  (Showcase cart)");
+    window.dispatchEvent(new CustomEvent("intentio:cart-update"));
     onAdded?.();
   };
 

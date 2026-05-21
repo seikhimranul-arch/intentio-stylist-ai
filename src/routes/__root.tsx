@@ -79,8 +79,16 @@ function RootShell({ children }: { children: React.ReactNode }) {
   );
 }
 
+import { useEffect } from "react";
+import { syncFromSupabase } from "@/lib/store";
+
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
+  
+  useEffect(() => {
+    syncFromSupabase().catch(console.error);
+  }, []);
+
   return (
     <QueryClientProvider client={queryClient}>
       <Outlet />

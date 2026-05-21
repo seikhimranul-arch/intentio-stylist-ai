@@ -44,9 +44,10 @@ function Onboarding() {
     setCustomNoGo("");
   };
 
-  const finish = () => {
-    upsertProfile({ gender, top_size: topSize, bottom_size: bottomSize, shoe_size: shoeSize, budget, styles, no_gos: noGos, onboarded: true });
-    toast.success("Style profile saved ✦");
+  const finish = async () => {
+    if (!gender) return;
+    await upsertProfile({ gender, top_size: topSize, bottom_size: bottomSize, shoe_size: shoeSize, budget, styles, no_gos: noGos, onboarded: true });
+    toast.success("Profile saved. Let's style.");
     navigate({ to: "/chat" });
   };
 
