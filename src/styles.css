@@ -47,24 +47,24 @@
 }
 
 :root {
-  --background: #050505;
-  --foreground: #fafafa;
-  --surface: #111111;
-  --surface-hover: #181818;
-  --border: #222222;
-  --border-light: #333333;
-  --accent-gold: #d4af37;
-  --accent-gold-light: #e8cc6e;
-  --ai-red: #ff3b30;
-  --text-secondary: #999999;
-  --text-muted: #555555;
-  --error: #ff453a;
-  --success: #30d158;
+  --background: #FFFFFF;
+  --foreground: #1D1D1F;
+  --surface: #F5F5F7;
+  --surface-hover: #EBEBEF;
+  --border: #E5E5EA;
+  --border-light: #C7C7CC;
+  --accent-gold: #00B4D8;
+  --accent-gold-light: #48CAE4;
+  --ai-red: #6C63FF;
+  --text-secondary: #86868B;
+  --text-muted: #A1A1A6;
+  --error: #FF3B30;
+  --success: #34C759;
 
-  --gradient-gold: linear-gradient(135deg, #d4af37, #e8cc6e);
-  --gradient-gold-text: linear-gradient(135deg, #e8cc6e, #d4af37);
-  --shadow-gold: 0 0 60px -10px color-mix(in oklab, #d4af37 35%, transparent);
-  --shadow-card: 0 20px 60px -20px rgba(0, 0, 0, 0.8);
+  --gradient-gold: linear-gradient(135deg, #0077B6, #00B4D8);
+  --gradient-gold-text: linear-gradient(135deg, #0077B6, #00B4D8);
+  --shadow-gold: 0 0 30px -10px color-mix(in oklab, #00B4D8 25%, transparent);
+  --shadow-card: 0 2px 12px rgba(0, 0, 0, 0.06);
 }
 
 .dark { color-scheme: dark; }
@@ -94,19 +94,15 @@
   .bg-gold-gradient { background: var(--gradient-gold); }
 
   .dot-grid-bg {
-    background-image: radial-gradient(rgba(212, 175, 55, 0.12) 1px, transparent 1px);
-    background-size: 32px 32px;
+    /* Removed for clean look */
   }
 
   .dotted-top {
-    background-image: repeating-linear-gradient(to right, var(--accent-gold) 0 4px, transparent 4px 10px);
-    background-repeat: no-repeat;
-    background-size: 100% 1px;
-    background-position: top left;
+    /* Removed for clean look */
   }
 
   .glass {
-    background: rgba(10, 10, 10, 0.6);
+    background: rgba(255, 255, 255, 0.8);
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
   }
@@ -114,7 +110,7 @@
   .pill { border-radius: 9999px; }
 
   .shimmer {
-    background: linear-gradient(90deg, #111 0%, #1a1a1a 50%, #111 100%);
+    background: linear-gradient(90deg, #F0F0F0 0%, #FAFAFA 50%, #F0F0F0 100%);
     background-size: 200% 100%;
     animation: shimmer 1.6s linear infinite;
   }
@@ -137,8 +133,8 @@
   to { opacity: 1; transform: translateX(0); }
 }
 @keyframes pulseGold {
-  0% { box-shadow: 0 0 0 0 rgba(212, 175, 55, 0.7); }
-  100% { box-shadow: 0 0 0 18px rgba(212, 175, 55, 0); }
+  0% { box-shadow: 0 0 0 0 rgba(0, 180, 216, 0.4); }
+  100% { box-shadow: 0 0 0 18px rgba(0, 180, 216, 0); }
 }
 @keyframes pulseDot {
   0%, 100% { opacity: 1; transform: scale(1); }
