@@ -157,23 +157,45 @@ export async function generateBundle(intent: string): Promise<GenerateResponse> 
     return { kind: "empty", message: "Tell me a bit more — even one sentence works." };
   }
   
-  const { data, error } = await supabase.functions.invoke('generate-bundle', {
-    body: { intent: text }
-  });
+  // DEMO BYPASS: Simulate AI loading time
+  await new Promise(resolve => setTimeout(resolve, 3500));
 
-  if (error) {
-    console.error("Error invoking edge function", error);
-    return { kind: "empty", message: "Sorry, my systems are currently offline. Please try again later." };
-  }
-
-  // The Edge Function already created the bundle in the database.
-  // We just need to sync it to local storage so the UI can render it.
-  if (data?.kind === 'bundle') {
-    await syncFromSupabase();
-    return { kind: "bundle", bundleId: data.bundleId };
-  }
-
-  return data as GenerateResponse;
+  const mockId = crypto.randomUUID();
+  const mockBundle: Bundle = {
+    id: mockId,
+    user_id: getUser()?.id || "demo",
+    intent: text,
+    summary: "This is a curated look based on your style profile. I selected a breathable linen shirt for comfort, paired with versatile chinos and classic white sneakers to complete the effortlessly sharp vibe.",
+    total: 6297,
+    status: "history",
+    created_at: new Date().toISOString(),
+    items: [
+      {
+        product_id: "demo-top",
+        role: "TOP",
+        reason: "Linen is perfect for a sunny day, keeping you cool while looking put-together.",
+        snapshot: { name: "Classic Linen Mandarin Collar Shirt", brand: "FabIndia", price: 1499, image: "https://images.unsplash.com/photo-1596755094514-f87e34085b2c?w=400", color: "ivory", material: "linen", category: "top" }
+      },
+      {
+        product_id: "demo-bottom",
+        role: "BOTTOM",
+        reason: "Tapered chinos offer a sharp silhouette that balances the relaxed fit of the top.",
+        snapshot: { name: "Tapered Chinos", brand: "Allen Solly", price: 1799, image: "https://images.unsplash.com/photo-1473966968600-fa801b869a1a?w=400", color: "khaki", material: "cotton twill", category: "bottom" }
+      },
+      {
+        product_id: "demo-footwear",
+        role: "FOOTWEAR",
+        reason: "White canvas sneakers tie the whole look together with a clean, modern finish.",
+        snapshot: { name: "White Canvas Sneakers", brand: "Converse", price: 2999, image: "https://images.unsplash.com/photo-1525966222134-fcfa99b8ae77?w=400", color: "white", material: "canvas", category: "footwear" }
+      }
+    ]
+  };
+  
+  // Save to local storage for immediate UI render
+  const existing = getBundles();
+  write(K_BUNDLES, [mockBundle, ...existing]);
+  
+  return { kind: "bundle", bundleId: mockId };
 }
 
 export function inr(n: number) {
