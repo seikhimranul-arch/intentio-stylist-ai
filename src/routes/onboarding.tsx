@@ -27,8 +27,17 @@ function Onboarding() {
   useEffect(() => {
     if (typeof window === "undefined") return;
     if (!getUser()) { navigate({ to: "/login" }); return; }
+    // Removed the aggressive redirect to /chat so users can edit their profile later!
     const p = getProfile();
-    if (p?.onboarded) navigate({ to: "/chat" });
+    if (p) {
+      setGender(p.gender as Gender || "neutral");
+      setTopSize(p.top_size || "M");
+      setBottomSize(p.bottom_size || "32");
+      if (p.shoe_size) setShoeSize(p.shoe_size);
+      setBudget(p.budget as Budget || "mid");
+      setStyles(p.styles || []);
+      setNoGos(p.no_gos || []);
+    }
   }, [navigate]);
 
   const toggleStyle = (s: string) => {
@@ -172,7 +181,7 @@ function Onboarding() {
           ) : (
             <button onClick={finish} disabled={styles.length === 0}
               className="pill bg-gold-gradient px-6 py-3 text-sm font-medium text-background disabled:opacity-40 hover:scale-[1.02] transition-transform">
-              Start Styling ✦
+              {getProfile()?.onboarded ? "Save Changes ✦" : "Start Styling ✦"}
             </button>
           )}
         </div>

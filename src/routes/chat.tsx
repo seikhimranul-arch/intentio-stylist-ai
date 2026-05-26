@@ -121,6 +121,9 @@ function ChatPage() {
             <span className="inline-block h-1.5 w-1.5 rounded-full bg-accent" />
           </Link>
           <div className="flex items-center gap-2">
+            <Link to="/onboarding" className="pill px-3 py-2 text-xs text-text-secondary hover:text-foreground transition">
+              Profile
+            </Link>
             <button onClick={() => setCartOpen(true)}
               className="relative pill border border-border bg-surface px-4 py-2 text-sm hover:border-border-light transition">
               <span className="mr-1.5">🛍</span> Bag
