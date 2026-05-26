@@ -63,6 +63,11 @@ export function getUser(): { id: string; email: string } | null {
 }
 
 export async function signUp(email: string, password: string) {
+  if (typeof window !== "undefined") {
+    window.localStorage.removeItem(K_USER);
+    window.localStorage.removeItem(K_PROFILE);
+    window.localStorage.removeItem(K_BUNDLES);
+  }
   const { data, error } = await supabase.auth.signUp({ email, password });
   if (error) throw error;
   if (data.user) {
@@ -75,6 +80,11 @@ export async function signUp(email: string, password: string) {
 }
 
 export async function signIn(email: string, password: string) {
+  if (typeof window !== "undefined") {
+    window.localStorage.removeItem(K_USER);
+    window.localStorage.removeItem(K_PROFILE);
+    window.localStorage.removeItem(K_BUNDLES);
+  }
   const { data, error } = await supabase.auth.signInWithPassword({ email, password });
   if (error) throw error;
   if (data.user) {
