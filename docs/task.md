@@ -1,0 +1,10 @@
+- [x] Phase 1: Edge Function Hardening
+  - [x] Update `generate-bundle/index.ts` with budget ranges, logging, shuffle, and retry logic
+- [x] Phase 2: Frontend Polish
+  - [x] Update `Chat.jsx` with retry handling and Bag label
+  - [x] Update `BundleCard.jsx` with image zoom and fallback
+  - [x] Update `Landing.jsx` for dynamic product fetch
+- [x] Phase 3: Documentation Alignment
+  - [x] Update `Intentio_Backend_Spec.md`
+  - [x] Update `Deployment_Guide.md`
+- [x] Verification and Walkthrough
